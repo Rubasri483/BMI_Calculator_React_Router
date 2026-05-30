@@ -1,5 +1,5 @@
 # Ex06 BMI Calculator
-## Date: 
+## Date: 30-05-2026
 
 ## AIM
 To develop a responsive and interactive Body Mass Index (BMI) Calculator using React that allows users to input their height and weight, and calculates their BMI to categorize their health status (e.g., Underweight, Normal, Overweight, Obese).
@@ -64,10 +64,98 @@ Create routing structure with react-router-dom:
 <li>Add styling using CSS or Tailwind.</li>
 
 ## PROGRAM
+### BMICalacukator.jsx
+```jsx
+import React, { useState } from "react";
+import "./BMI.css";
 
+function BMICalculator() {
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
+  const [bmi, setBmi] = useState("");
+  const [status, setStatus] = useState("");
+
+  const calculateBMI = () => {
+    const h = height / 100; // cm to m
+    const bmiValue = (weight / (h * h)).toFixed(2);
+
+    setBmi(bmiValue);
+
+    if (bmiValue < 18.5) {
+      setStatus("Underweight");
+    } else if (bmiValue < 25) {
+      setStatus("Normal Weight");
+    } else if (bmiValue < 30) {
+      setStatus("Overweight");
+    } else {
+      setStatus("Obese");
+    }
+  };
+
+  return (
+    <div className="bmi-container">
+      <h2>BMI Calculator</h2>
+
+      <input
+        type="number"
+        placeholder="Enter Weight (kg)"
+        value={weight}
+        onChange={(e) => setWeight(e.target.value)}
+      />
+
+      <input
+        type="number"
+        placeholder="Enter Height (cm)"
+        value={height}
+        onChange={(e) => setHeight(e.target.value)}
+      />
+
+      <button onClick={calculateBMI}>Calculate BMI</button>
+
+      {bmi && (
+        <div>
+          <h3>Your BMI: {bmi}</h3>
+          <h3>Category: {status}</h3>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default BMICalculator;
+```
+
+### BMI.css
+```jsx
+.bmi-container {
+  width: 350px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.bmi-container input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.bmi-container button {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.bmi-container h3 {
+  margin-top: 15px;
+}
+```
 
 
 ## OUTPUT
+<img width="1347" height="647" alt="image" src="https://github.com/user-attachments/assets/d1d2290a-7014-4733-a6c9-0992c7a593d5" />
 
 
 
